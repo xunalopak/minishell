@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:10:06 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 19:36:27 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/22 23:05:16 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ int	set_directory(char *path, int home)
 
 	if (change(path, home))
 		return (1);
+	dup2(STDOUT_FILENO, STDERR_FILENO);
 	printf("minishell: cd: ");
 	printf("%s", path);
 	if (stat(path, &st) == -1)
-	{
 		printf(": No such file or directory");
-	}
 	else if (!(st.st_mode & S_IXUSR))
 		printf(": Permission denied");
 	else
@@ -90,6 +89,7 @@ int	cd(char **av)
 	home = NULL;
 	if (av && av[1] && av[2])
 	{
+		dup2(STDOUT_FILENO, STDERR_FILENO);
 		printf("minishell: cd: too many arguments\n");
 		return (1);
 	}
@@ -98,6 +98,7 @@ int	cd(char **av)
 		home = get_env("HOME");
 		if (!home)
 		{
+			dup2(STDOUT_FILENO, STDERR_FILENO);
 			printf("minishell: cd: HOME not set\n");
 			return (1);
 		}

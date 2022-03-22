@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:29 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 17:02:06 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:34:38 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,27 @@ int	ft_strequ(char const *s1, char const *s2)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	size_t			i;
+	char			*str;
 
 	i = 0;
-	str = (char *)malloc(sizeof(*s) * len + 1);
+	if (!s)
+		return (0);
+	if (ft_strlen(s) < start)
+	{
+		return (ft_strdup(""));
+	}
+	if (ft_strlen(&s[start]) <= len)
+		len = ft_strlen(&s[start]);
+	str = malloc((sizeof(char) * (len + 1)));
 	if (!str)
 		return (0);
-	while (s[i])
+	while (i < len)
 	{
-		while (i >= start && j < len)
-		{
-			str[i] = s[i];
-			j++;
-		}
+		str[i] = s[start + i];
 		i++;
 	}
-	str[j] = '\0';
+	str[i] = '\0';
 	return (str);
 }
 
@@ -146,7 +149,7 @@ void	print_env(char **env)
 	}
 }
 
-char	**realloc_env(size_t size, char **envp)
+char	**realloc_env(size_t size, char **envp, int	to_free)
 {
 	char	**new;
 	size_t	i;
@@ -161,7 +164,8 @@ char	**realloc_env(size_t size, char **envp)
 		i++;
 	}
 	new[size] = 0;
-	ft_free_array(envp);
+	if (to_free == 1)
+		ft_free_array(envp);
 	return (new);
 }
 
@@ -207,7 +211,7 @@ ssize_t	find_env(char *env, char **envp)
 	while (envp[++i])
 	{
 		i2 = ft_istrchr(envp[i], '=');
-		if ((i2 == -1))
+		if (i2 == -1)
 			i2 = ft_strlen(envp[i]);
 		sub = ft_substr(envp[i], 0, i2);
 		if (sub)
@@ -255,8 +259,8 @@ int	set_env(char *env, char *new_env, char **envp)
 	else
 	{
 		len = get_env_count(envp) + 1;
-		envp = realloc_env(len, envp);
-		tmp = ft_strjoin(env, '=');
+		envp = realloc_env(len, envp, 1);
+		tmp = ft_strjoin(env, "=");
 		envp[len - 1] = ft_strjoin(tmp, new_env);
 		free(tmp);
 		return (1);

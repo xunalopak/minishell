@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:41:24 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 19:37:24 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:57:58 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	**remove_env(ssize_t i2, char **envp)
 		envp[i] = tmp;
 		i++;
 	}
-	return (realloc_env((size - 1)));
+	return (realloc_env((size - 1), envp, 1));
 }
 
 int	unset(char **arg, char **envp)
@@ -40,14 +40,17 @@ int	unset(char **arg, char **envp)
 	i = 0;
 	while (arg[++i])
 	{
-		i2 = find_env(arg[i]);
+		i2 = find_env(arg[i], envp);
 		if (i2 != -1)
 		{
 			if (envp[i])
 				envp[i] = remove_env(i2, envp);
 		}
 		else
+		{
+			dup2(STDOUT_FILENO, STDERR_FILENO);
 			printf("minishell: unset `%s': not a valid identifier\n", arg[i]);
+		}
 	}
 	return (1);
 }

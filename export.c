@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:07:26 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 20:17:20 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:56:15 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 int	ft_isalpha(int c)
 {
 	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }
 
 int	ft_isdigit(int c)
@@ -50,7 +60,7 @@ char	*ft_strdup(const char *s)
 	unsigned char	*dest;
 
 	i = 0;
-	dest = malloc(sizeof(char) * ft_strlen(s));
+	dest = malloc(sizeof(char *) * ft_strlen(s));
 	if (!dest)
 		return (0);
 	while (s[i])
@@ -59,7 +69,7 @@ char	*ft_strdup(const char *s)
 		i++;
 	}
 	dest[i] = '\0';
-	return (dest);
+	return ((char *)dest);
 }
 
 int	ft_strchr_i(const char *s, int c)
@@ -118,9 +128,9 @@ char	**ft_extend_matrix(char **in, char *newstr)
 		return (in);
 	len = ft_matrixlen(in);
 	out = malloc(sizeof(char *) * (len + 2));
-	out[len + 1] = NULL;
 	if (!out)
 		return (in);
+	out[len + 1] = NULL;
 	while (++i < len)
 	{
 		out[i] = ft_strdup(in[i]);
@@ -140,12 +150,12 @@ static int	var_in_envp(char **av, char **envp, int i[2])
 	int	pos;
 
 	i[1] = 0;
-	pos = ft_strchr_i(av, '=');
+	pos = ft_strchr_i(av[1], '=');
 	if (pos == -1)
 		return (-1);
 	while (envp[i[1]])
 	{
-		if (!ft_strncmp(envp[i[1]], av, pos + 1))
+		if (!ft_strncmp(envp[i[1]], av[1], pos + 1))
 			return (1);
 		i[1]++;
 	}
@@ -159,7 +169,7 @@ static char	**dup_env(char **envp)
 	char	**dup;
 	size_t	count;
 
-	count = get_env_count();
+	count = get_env_count(envp);
 	dup = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!dup)
 		return (NULL);
@@ -187,17 +197,17 @@ static void	print_export(char **export)
 		printf("declare -x ");
 		while (export[i][j])
 		{
-			printf("%s", export[i][j]);
+			printf("%c", export[i][j]);
 			if (export[i][j] == '=' && equ)
 			{
-				printf('"');
+				printf("%c", 34);
 				equ--;
 			}
 			j++;
 		}
 		if (!equ)
-			printf('"', 1);
-		printf('\n', 1);
+			printf("%c", 34);
+		printf("\n");
 		i++;
 	}
 }
@@ -255,9 +265,9 @@ int	check_export_name(char *av)
 	return (1);
 }
 
-static int	sub_free(char *st, char *end)
+static int	sub_free(char *st, char *end, char **envp)
 {
-	if (set_env(st, end))
+	if (set_env(st, end, envp))
 	{
 		free(st);
 		free(end);
@@ -282,23 +292,27 @@ static int	set(char *av, size_t equ, size_t index, char **envp)
 		equ_env = ft_strlen(envp[index]);
 		st = envp[index];
 		envp[index] = ft_strjoin(envp[index], "=");
+		if (!envp)
+			return (0);
 		free(st);
 	}
 	st = ft_substr(envp[index], 0, (size_t)equ_env);
 	if (!st)
 		return (0);
 	end = ft_substr(av, (equ + 1), ft_strlen(av));
-	return (sub_free(st, end));
+	if (!end)
+		return (0);
+	return (sub_free(st, end, envp));
 }
 
-static void	modify(char **av, char *st, size_t i, char **envp)
+static void	modify(char **av, char *st, size_t i, char ***envp)
 {
 	char	*end;
 	size_t	count;
 
 	end = NULL;
-	count = get_env_count(envp) + 1;
-	envp = realloc_env(count);
+	count = get_env_count(*envp) + 1;
+	*envp = realloc_env(count, *envp, 1);
 	st = ft_substr(av[i], 0, ft_istrchr(av[i], '=') + 1);
 	if (!st)
 		return ;
@@ -308,12 +322,12 @@ static void	modify(char **av, char *st, size_t i, char **envp)
 		free(st);
 		return ;
 	}
-	envp[count - 1] = ft_strjoin(st, end);
+	(*envp)[count - 1] = ft_strjoin(st, end);
 	free(st);
 	free(end);
 }
 
-static void	add(char **av, size_t i, char **envp)
+static void	add(char **av, size_t i, char ***envp)
 {
 	ssize_t	index;
 	size_t	equal_index;
@@ -323,21 +337,21 @@ static void	add(char **av, size_t i, char **envp)
 	if (equal_index == (size_t) - 1)
 		equal_index = ft_strlen(av[i]);
 	st = ft_substr(av[i], 0, equal_index);
-	index = find_env(st, envp);
+	index = find_env(st, *envp);
 	free(st);
 	if (index != -1)
-		set(av[i], equal_index, index, envp);
+		set(av[i], equal_index, index, *envp);
 	else
 		modify(av, st, i, envp);
 }
 
-int	export(char **av, char **envp)
+int	export(char **av, char ***envp)
 {
 	size_t	i;
 
 	if (!av[1])
 	{
-		sort_env(envp);
+		sort_env(*envp);
 		return (1);
 	}
 	i = 0;
@@ -345,16 +359,13 @@ int	export(char **av, char **envp)
 	{
 		if (!check_export_name(av[i]))
 		{
+			dup2(STDOUT_FILENO, STDERR_FILENO);
 			printf("minishell: export: `%s': not a valid identifier\n",
 				av[i]);
 			continue ;
 		}
 		add(av, i, envp);
+
 	}
 	return (1);
-}
-
-int	main(int ac, char **av, char **envp)
-{
-	export_env(av, envp);
 }
