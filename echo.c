@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:27:10 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/16 18:49:53 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:16:26 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,19 @@ static size_t	check_n(char **av)
 	return (i);
 }
 
-int				run_echo(char **av)
+int				run_echo(char **av, char **envp)
 {
 	size_t	i;
 	int		n;
 
 	n = 1;
-	if (g_error != 1)
-		g_status = 0;
 	if (!av[1])
 	{
 		printf("\n");
 		return (1);
 	}
-	// pour ça faudra verifier sur la fonction qui la rentre en rajoutant un bool
+	if ((ft_strequ(av, " ") && !av[2]))
+		return (1);
 	i = check_n(av);
 	n = i > 1 ? 0 : 1;
 	while (av[i])

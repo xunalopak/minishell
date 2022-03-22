@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:41:24 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 17:04:37 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:15:02 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	unset(char **arg, char **envp)
 				envp[i] = remove_env(i2, envp);
 		}
 		else
-			printf("minishell: unset `%s': not a valid identifier",arg[i]);
+			printf("minishell: unset `%s': not a valid identifier\n",arg[i]);
 	}
 	return (1);
 }
