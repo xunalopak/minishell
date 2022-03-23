@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:07:26 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 17:54:27 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:16:32 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_export(char **av, char ***envp)
 	if (!av[1])
 	{
 		sort_env(*envp);
-		return (1);
+		return (0);
 	}
 	i = 0;
 	while (av[++i])
