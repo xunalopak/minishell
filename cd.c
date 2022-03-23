@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:10:06 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:02:47 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:52:07 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	cd(char **av, char **envp)
 		printf("minishell: cd: too many arguments\n");
 		return (1);
 	}
-	if (!av || ft_strequ(av, "~") || ft_strequ(av, "--"))
+	if (!av || ft_strequ(av[1], "~") || ft_strequ(av[1], "--"))
 	{
 		home = get_env("HOME", envp);
 		if (!home)

@@ -6,11 +6,11 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:14:02 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:05:26 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:35:57 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {

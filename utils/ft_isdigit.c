@@ -6,11 +6,11 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:11:53 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:16:04 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:36:11 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_isdigit(int c)
 {

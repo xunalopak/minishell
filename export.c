@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:07:26 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:04:22 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:58:24 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	modify(char **av, char *st, size_t i, char ***envp)
 
 	end = NULL;
 	count = get_env_count(*envp) + 1;
-	*envp = realloc_env(count, *envp, 1);
+	(*envp) = realloc_env(count, *envp, 1);
 	st = ft_substr(av[i], 0, ft_istrchr(av[i], '=') + 1);
 	if (!st)
 		return ;
@@ -92,7 +92,7 @@ static void	add(char **av, size_t i, char ***envp)
 		modify(av, st, i, envp);
 }
 
-int	export(char **av, char ***envp)
+int	ft_export(char **av, char ***envp)
 {
 	size_t	i;
 

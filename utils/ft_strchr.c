@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:57:32 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:57:41 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:46 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	char	*str;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchampli <rchampli@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:27:10 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 19:41:23 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:45:43 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	echo(char **av, char **envp)
 		printf("\n");
 		return (1);
 	}
-	if ((ft_strequ(av, " ") && !av[2]))
+	if ((ft_strequ(av[1], " ") && !av[2]))
 		return (1);
 	i = check_n(av);
 	if (i > 1)

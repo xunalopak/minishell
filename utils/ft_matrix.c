@@ -6,11 +6,11 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:18:51 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 14:01:12 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:49:17 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_matrixlen(char **m)
 {
@@ -36,7 +36,7 @@ void	ft_free_matrix(char ***m)
 	m = NULL;
 }
 
-char	**ft_extend_matrix2(char **in, char *newstr, char **out, int i)
+void	ft_extend_matrix2(char **in, char *newstr, char **out, int i)
 {
 	out[i] = ft_strdup(in[i]);
 	if (!out[i])

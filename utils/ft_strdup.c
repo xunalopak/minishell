@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:16:37 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:05:38 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:22 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup( char *s)
 {
 	unsigned int	i;
 	unsigned char	*dest;

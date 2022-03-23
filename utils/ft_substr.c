@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:54:59 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:55:15 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:22 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char  *s, unsigned int start, size_t len)
 {
 	size_t			i;
 	char			*str;

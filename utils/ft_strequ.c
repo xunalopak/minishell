@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:55:42 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:55:49 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:22 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	ft_strequ(char const *s1, char const *s2)
+int	ft_strequ(char  *s1, char  *s2)
 {
 	int		i;
 

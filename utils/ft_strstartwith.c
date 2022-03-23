@@ -6,11 +6,11 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:53:35 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:54:32 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:35:44 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_strstartwith(char *s1, char *s2)
 {

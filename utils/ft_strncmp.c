@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:14:51 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:15:51 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:22 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp( char *s1,  char *s2, size_t n)
 {
 	size_t	i;
 

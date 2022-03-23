@@ -6,11 +6,11 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:56:32 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:56:46 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:36:08 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 ssize_t	ft_istrchr(char *str, char c)
 {

@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:54:18 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:54:29 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:22 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char  *s1, char  *s2)
 {
 	size_t			i;
 	size_t			len;
