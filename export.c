@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:07:26 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 18:16:32 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:19:43 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_export(char **av, char ***envp)
 			ft_printerror("minishell: export: `");
 			ft_printerror(av[i]);
 			ft_printerror("': not a valid identifier\n");
-			continue ;
+			return (1);
 		}
 		add(av, i, envp);
 	}
