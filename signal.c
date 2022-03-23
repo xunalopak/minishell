@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 03:26:50 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 17:34:02 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:35:41 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 void	sigint_handler(int sign_num)
 {
 	if (sign_num == SIGINT)
-		printf("\n");
 		// control+c
 	else if (sign_num == SIGQUIT)
-		printf("\b\b  \b\b");
 		/* control+\ */
 }
 
