@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:58 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 13:36:16 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:50:43 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <errno.h>
 
 //signal
-void	sigint_handler(int sign_num, pid_t pid);
+void		sigint_handler(int sign_num, pid_t pid);
 
 //exit
 void		ft_exit(void);
