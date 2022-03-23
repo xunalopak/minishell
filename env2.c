@@ -6,13 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:58:47 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 01:58:57 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:17:56 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(char **env)
+int	print_env(char **env)
 {
 	size_t	i;
 
@@ -22,6 +22,7 @@ void	print_env(char **env)
 		printf("%s\n", env[i]);
 		i++;
 	}
+	return (0);
 }
 
 size_t	get_env_count(char **envp)

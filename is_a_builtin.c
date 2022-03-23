@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 22:29:00 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:04:39 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:17:08 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,24 @@ int	is_a_builtin(char **av)
 	return (1);
 }
 
-void	launch_builtin(char *prgm, char **av, char ***envp)
+int	launch_builtin(char *prgm, char **av, char ***envp)
 {
-	// reallouer toute la table envp
+	char	*arg;
+	int		i;
+
+	i = 1;
+	arg = av[1];
+	if (ft_strequ(arg, "cd"))
+		i = cd(av, &envp);
+	else if (ft_strequ(arg, "export"))
+		i = export(av, &envp);
+	else if (ft_strequ(arg, "pwd"))
+		i = pwd();
+	else if (ft_strequ(arg, "unset"))
+		i = unset(av, &envp);
+	else if (ft_strequ(arg, "env"))
+		i = print_env(&envp);
+	else if (ft_strequ(arg, "echo"))
+		i = echo(av, &envp);
+	return (i);
 }

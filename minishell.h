@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:58 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:04:56 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:18:04 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,18 @@
 //is_a_builtin
 int			is_a_builtin(char **av);
 
+//pwd
+int			pwd(void);
+
+//echo
+int			echo(char **av, char **envp);
+
 //env
 size_t		get_env_count(char **envp);
 int			set_env(char *env, char *new_env, char **envp);
 char		**realloc_env(size_t size, char **envp, int to_free);
 ssize_t		find_env(char *env, char **envp);
-void		print_env(char **env);
+int			print_env(char **env);
 char		*get_env(char *name, char **env);
 
 //cd
