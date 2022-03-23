@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 03:26:50 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 13:21:33 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:34:00 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@ void	process(int sign_num, pid_t pid)
 	{
 		if (sign_num == SIGQUIT)
 			printf("Quit: 3\n");
-		else if(sign_num == SIGINT)
+		else if (sign_num == SIGINT)
 			printf("\n");
 	}
 	else if (sign_num == SIGINT)
-	{
 		printf("\n");
-		
-	}
 }
 
 // peut etre recuper le pid sur un fork dans l'execution
@@ -37,16 +34,8 @@ void	sigint_handler(int sign_num, pid_t pid)
 	else
 	{
 		if (sign_num == SIGINT)
-		{
 			printf("\n");
-			return ;
-		}
 		else if (sign_num == SIGQUIT)
 			printf("\b\b  \b\b");
 	}
-}
-
-int	main()
-{
-	printf("\b\b  \b\b");
 }
