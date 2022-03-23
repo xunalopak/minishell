@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:07:26 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 17:26:25 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:54:27 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,5 @@ int	ft_export(char **av, char ***envp)
 		}
 		add(av, i, envp);
 	}
-	return (1);
+	return (0);
 }

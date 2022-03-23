@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:27:10 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 14:45:43 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:53:32 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int	echo(char **av, char **envp)
 	}
 	if (n)
 		printf("\n");
-	return (1);
+	return (0);
 }

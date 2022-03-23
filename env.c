@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:29 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:28:01 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:54:02 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	set_env(char *env, char *new_env, char **envp)
 	size_t	len;
 
 	if (!env || !new_env)
-		return (0);
+		return (1);
 	len = ft_strlen(env);
 	i = find_env(env, envp);
 	if (i != -1)
@@ -117,7 +117,7 @@ int	set_env(char *env, char *new_env, char **envp)
 		tmp = ft_strjoin(env, "=");
 		envp[len - 1] = ft_strjoin(tmp, new_env);
 		free(tmp);
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
