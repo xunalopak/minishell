@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:41:24 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 18:24:34 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:27:31 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,12 @@ int	unset(char **arg, char ***envp)
 			if (*envp[i2])
 				*envp = remove_env(i2, *envp);
 		}
-		else
+		if (!check_export_name(arg))
 		{
-			if (ft_isdigit(av[i]) && !alpha)
-				return (0);
-			else if (!ft_isdigit(av[i]) && av[i] != '_')
-			{
-				ft_printerror("minishell: unset `");
-				ft_printerror(arg[i]);
-				ft_printerror("': not a valid identifier\n");
-				return (1);
-			}
+			ft_printerror("minishell: unset `");
+			ft_printerror(arg[i]);
+			ft_printerror("': not a valid identifier\n");
+			return (1);
 		}
 	}
 	return (0);
