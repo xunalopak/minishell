@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:41:24 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 17:22:08 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:21:34 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	unset(char **arg, char ***envp)
 			ft_printerror("minishell: unset `");
 			ft_printerror(arg[i]);
 			ft_printerror("': not a valid identifier\n");
-			return (1);
+			return (0);
 		}
 	}
 	return (0);
