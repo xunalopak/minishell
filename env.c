@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:29 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:03:54 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:23:59 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*get_env(char *name, char **env)
 			return (ft_strchr(env[i], '=') + 1);
 		}
 		free(tmp);
+		i++;
 	}
 	return (NULL);
 }
