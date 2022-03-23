@@ -6,150 +6,13 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:29 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 00:34:38 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:03:54 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//util
-char	*ft_strchr(const char *s, int c)
-{
-	char	*str;
-
-	str = (char *)s;
-	while (*str != c)
-	{
-		if (*str == '\0')
-		{
-			return (NULL);
-		}
-		str++;
-	}
-	return (str);
-}
-
-ssize_t	ft_istrchr(char *str, char c)
-{
-	char	*ch;
-
-	ch = ft_strchr(str, c);
-	if (!ch)
-		return (-1);
-	return ((size_t)(ch - str));
-}
-
-int	ft_strequ(char const *s1, char const *s2)
-{
-	int		i;
-
-	if (s1 == NULL || s2 == NULL)
-		return (0);
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (s1[i] != s2[i])
-		return (0);
-	return (1);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t			i;
-	char			*str;
-
-	i = 0;
-	if (!s)
-		return (0);
-	if (ft_strlen(s) < start)
-	{
-		return (ft_strdup(""));
-	}
-	if (ft_strlen(&s[start]) <= len)
-		len = ft_strlen(&s[start]);
-	str = malloc((sizeof(char) * (len + 1)));
-	if (!str)
-		return (0);
-	while (i < len)
-	{
-		str[i] = s[start + i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t			i;
-	size_t			len;
-	size_t			j;
-	unsigned char	*str;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc(sizeof(char) * len + 1);
-	if (!str || !s1 || !s2)
-		return (0);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	return ((char *)str);
-}
-
-int	ft_strstartwith(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = -1;
-	while (s2[++i])
-		if (s2[i] != s1[i])
-			return (0);
-	return (1);
-}
-
-void	ft_free_array(char **array)
-{
-	size_t	i;
-
-	i = -1;
-	if (!array)
-		return ;
-	while (array[++i] != NULL)
-	{
-		free(array[i]);
-	}
-	free(array);
-}
-
-//env
-
-void	print_env(char **env)
-{
-	size_t	i;
-
-	i = 0;
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
-}
-
-char	**realloc_env(size_t size, char **envp, int	to_free)
+char	**realloc_env(size_t size, char **envp, int to_free)
 {
 	char	**new;
 	size_t	i;
@@ -167,16 +30,6 @@ char	**realloc_env(size_t size, char **envp, int	to_free)
 	if (to_free == 1)
 		ft_free_array(envp);
 	return (new);
-}
-
-size_t	get_env_count(char **envp)
-{
-	size_t	i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	return (i);
 }
 
 char	*get_env(char *name, char **env)

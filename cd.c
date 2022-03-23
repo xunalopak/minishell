@@ -6,13 +6,34 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:10:06 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/22 23:05:16 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:02:47 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	change(char *path, int home)
+static char	*add_home_path(char *path, char **envp)
+{
+	char	*tmp;
+	char	*tmpp;
+
+	if (!ft_strncmp(path, "~/", 2))
+	{
+		tmp = get_env("HOME", envp);
+		if (tmp)
+		{
+			tmpp = ft_substr(path, 1, ft_strlen(path));
+			free(path);
+			path = ft_strjoin(tmp, tmpp);
+			free(tmpp);
+			free(tmp);
+			return (path);
+		}
+	}
+	return (path);
+}
+
+int	change(char *path, int home, char **envp)
 {
 	char	*pwd;
 
@@ -21,13 +42,13 @@ int	change(char *path, int home)
 	{
 		if (pwd)
 		{
-			set_env("OLDPWD", pwd);
+			set_env("OLDPWD", pwd, envp);
 			free(pwd);
 		}
 		pwd = getcwd(NULL, 0);
 		if (pwd)
 		{
-			set_env("PWD", pwd);
+			set_env("PWD", pwd, envp);
 			free(pwd);
 		}
 		if (home)
@@ -38,11 +59,11 @@ int	change(char *path, int home)
 	return (0);
 }
 
-int	set_directory(char *path, int home)
+int	set_directory(char *path, int home, char **envp)
 {
 	struct stat	st;
 
-	if (change(path, home))
+	if (change(path, home, envp))
 		return (1);
 	dup2(STDOUT_FILENO, STDERR_FILENO);
 	printf("minishell: cd: ");
@@ -59,19 +80,19 @@ int	set_directory(char *path, int home)
 	return (1);
 }
 
-int	s_path(char **av)
+int	s_path(char **av, char **envp)
 {
 	char	*tmp;
 
 	if (ft_strequ(av[1], "-"))
 	{
-		tmp = get_env("OLDPWD");
+		tmp = get_env("OLDPWD", envp);
 		if (tmp)
 		{
-			set_directory(tmp, 0);
+			set_directory(tmp, 0, envp);
 			free(tmp);
 		}
-		tmp = get_env("PWD");
+		tmp = get_env("PWD", envp);
 		if (tmp)
 		{
 			printf("%s", tmp);
@@ -79,10 +100,10 @@ int	s_path(char **av)
 		}
 		return (1);
 	}
-	return (set_directory(av[1], 0));
+	return (set_directory(av[1], 0, envp));
 }
 
-int	cd(char **av)
+int	cd(char **av, char **envp)
 {
 	char	*home;
 
@@ -95,15 +116,15 @@ int	cd(char **av)
 	}
 	if (!av || ft_strequ(av, "~") || ft_strequ(av, "--"))
 	{
-		home = get_env("HOME");
+		home = get_env("HOME", envp);
 		if (!home)
 		{
 			dup2(STDOUT_FILENO, STDERR_FILENO);
 			printf("minishell: cd: HOME not set\n");
 			return (1);
 		}
-		return (set_directory(home, 1));
+		return (set_directory(home, 1, envp));
 	}
-	av[1] = add_home_path(av[1]);
-	return (s_path(av));
+	av[1] = add_home_path(av[1], envp);
+	return (s_path(av, envp));
 }

@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_a_builtin.c                                     :+:      :+:    :+:   */
+/*   ft_strstartwith.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 22:29:00 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:04:39 by rchampli         ###   ########.fr       */
+/*   Created: 2022/03/23 01:53:35 by rchampli          #+#    #+#             */
+/*   Updated: 2022/03/23 01:54:32 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_a_builtin(char **av)
+int	ft_strstartwith(char *s1, char *s2)
 {
-	char	*arg;
+	size_t	i;
 
-	arg = av[1];
-	if (ft_strequ(arg, "cd"))
-		return (0);
-	else if (ft_strequ(arg, "export"))
-		return (0);
-	else if (ft_strequ(arg, "pwd"))
-		return (0);
-	else if (ft_strequ(arg, "unset"))
-		return (0);
-	else if (ft_strequ(arg, "env"))
-		return (0);
-	else if (ft_strequ(arg, "echo"))
-		return (0);
+	i = -1;
+	while (s2[++i])
+		if (s2[i] != s1[i])
+			return (0);
 	return (1);
-}
-
-void	launch_builtin(char *prgm, char **av, char ***envp)
-{
-	// reallouer toute la table envp
 }

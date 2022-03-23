@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_a_builtin.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 22:29:00 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:04:39 by rchampli         ###   ########.fr       */
+/*   Created: 2022/03/23 01:54:18 by rchampli          #+#    #+#             */
+/*   Updated: 2022/03/23 01:54:29 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_a_builtin(char **av)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*arg;
+	size_t			i;
+	size_t			len;
+	size_t			j;
+	unsigned char	*str;
 
-	arg = av[1];
-	if (ft_strequ(arg, "cd"))
+	i = 0;
+	j = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc(sizeof(char) * len + 1);
+	if (!str || !s1 || !s2)
 		return (0);
-	else if (ft_strequ(arg, "export"))
-		return (0);
-	else if (ft_strequ(arg, "pwd"))
-		return (0);
-	else if (ft_strequ(arg, "unset"))
-		return (0);
-	else if (ft_strequ(arg, "env"))
-		return (0);
-	else if (ft_strequ(arg, "echo"))
-		return (0);
-	return (1);
-}
-
-void	launch_builtin(char *prgm, char **av, char ***envp)
-{
-	// reallouer toute la table envp
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return ((char *)str);
 }

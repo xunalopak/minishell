@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_a_builtin.c                                     :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 22:29:00 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:04:39 by rchampli         ###   ########.fr       */
+/*   Created: 2022/03/23 01:54:59 by rchampli          #+#    #+#             */
+/*   Updated: 2022/03/23 01:55:15 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_a_builtin(char **av)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*arg;
+	size_t			i;
+	char			*str;
 
-	arg = av[1];
-	if (ft_strequ(arg, "cd"))
+	i = 0;
+	if (!s)
 		return (0);
-	else if (ft_strequ(arg, "export"))
+	if (ft_strlen(s) < start)
+	{
+		return (ft_strdup(""));
+	}
+	if (ft_strlen(&s[start]) <= len)
+		len = ft_strlen(&s[start]);
+	str = malloc((sizeof(char) * (len + 1)));
+	if (!str)
 		return (0);
-	else if (ft_strequ(arg, "pwd"))
-		return (0);
-	else if (ft_strequ(arg, "unset"))
-		return (0);
-	else if (ft_strequ(arg, "env"))
-		return (0);
-	else if (ft_strequ(arg, "echo"))
-		return (0);
-	return (1);
-}
-
-void	launch_builtin(char *prgm, char **av, char ***envp)
-{
-	// reallouer toute la table envp
+	while (i < len)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
