@@ -6,11 +6,29 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:10:06 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 17:24:46 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 23:48:14 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int        ft_printerror(char *s)
+{
+    if (!s)
+        return (0);
+    write(STDERR_FILENO, s, ft_strlen(s));
+    return (ft_strlen(s));
+}
 
 static char	*add_home_path(char *path, char **envp)
 {
@@ -33,7 +51,7 @@ static char	*add_home_path(char *path, char **envp)
 	return (path);
 }
 
-int	change(char *path, int home, char **envp)
+static int	change(char *path, char **envp)
 {
 	char	*pwd;
 
@@ -51,8 +69,6 @@ int	change(char *path, int home, char **envp)
 			set_env("PWD", pwd, envp);
 			free(pwd);
 		}
-		if (home)
-			free(path);
 		return (1);
 	}
 	free(pwd);
@@ -63,12 +79,14 @@ int	set_directory(char *path, int home, char **envp)
 {
 	struct stat	st;
 
-	if (change(path, home, envp))
+	if (change(path, envp))
 		return (1);
 	ft_printerror("minishell: cd: ");
 	ft_printerror(path);
 	if (stat(path, &st) == -1)
+	{
 		ft_printerror(": No such file or directory");
+	}
 	else if (!(st.st_mode & S_IXUSR))
 		ft_printerror(": Permission denied");
 	else
@@ -79,11 +97,11 @@ int	set_directory(char *path, int home, char **envp)
 	return (1);
 }
 
-int	s_path(char **av, char **envp)
+int	s_path(char **args, char **envp)
 {
-	char	*tmp;
+	char *tmp;
 
-	if (ft_strequ(av[1], "-"))
+	if (ft_strequ(args[1], "-"))
 	{
 		tmp = get_env("OLDPWD", envp);
 		if (tmp)
@@ -96,32 +114,32 @@ int	s_path(char **av, char **envp)
 		{
 			printf("%s", tmp);
 			free(tmp);
+			printf("\n");
 		}
 		return (1);
 	}
-	return (set_directory(av[1], 0, envp));
+	return (set_directory(args[1], 0, envp));
 }
 
-int	cd(char **av, char **envp)
+int	cd(char **args, char **envp)
 {
 	char	*home;
 
 	home = NULL;
-	if (av && av[1] && av[2])
+	if (args && args[1] && args[2])
 	{
 		ft_printerror("minishell: cd: too many arguments\n");
-		return (1);
+		return (0);
 	}
-	if (!av[1] || ft_strequ(av[1], "~") || ft_strequ(av[1], "--"))
+	if (!args[1] || ft_strequ(args[1], "~") || ft_strequ(args[1], "--"))
 	{
-		home = get_env("HOME", envp);
-		if (!home)
+		if (!(home = get_env("HOME", envp)))
 		{
 			ft_printerror("minishell: cd: HOME not set\n");
-			return (1);
+			return (0);
 		}
 		return (set_directory(home, 1, envp));
 	}
-	av[1] = add_home_path(av[1], envp);
-	return (s_path(av, envp));
+	args[1] = add_home_path(args[1], envp);
+	return (s_path(args, envp));
 }
