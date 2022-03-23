@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:07:26 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 16:01:02 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:26:25 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ int	ft_export(char **av, char ***envp)
 	{
 		if (!check_export_name(av[i]))
 		{
-			dup2(STDOUT_FILENO, STDERR_FILENO);
-			printf("minishell: export: `%s': not a valid identifier\n",
-				av[i]);
+			ft_printerror("minishell: export: `");
+			ft_printerror(av[i]);
+			ft_printerror("': not a valid identifier\n");
 			continue ;
 		}
 		add(av, i, envp);

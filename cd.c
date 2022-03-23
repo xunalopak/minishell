@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:10:06 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 17:18:27 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:24:46 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,15 @@ int	set_directory(char *path, int home, char **envp)
 
 	if (change(path, home, envp))
 		return (1);
-	dup2(STDOUT_FILENO, STDERR_FILENO);
-	printf("minishell: cd: ");
-	printf("%s", path);
+	ft_printerror("minishell: cd: ");
+	ft_printerror(path);
 	if (stat(path, &st) == -1)
-		printf(": No such file or directory");
+		ft_printerror(": No such file or directory");
 	else if (!(st.st_mode & S_IXUSR))
-		printf(": Permission denied");
+		ft_printerror(": Permission denied");
 	else
-		printf(": Not a directory");
-	printf("\n");
+		ft_printerror(": Not a directory");
+	ft_printerror("\n");
 	if (home)
 		free(path);
 	return (1);
@@ -110,8 +109,7 @@ int	cd(char **av, char **envp)
 	home = NULL;
 	if (av && av[1] && av[2])
 	{
-		dup2(STDOUT_FILENO, STDERR_FILENO);
-		printf("minishell: cd: too many arguments\n");
+		ft_printerror("minishell: cd: too many arguments\n");
 		return (1);
 	}
 	if (!av[1] || ft_strequ(av[1], "~") || ft_strequ(av[1], "--"))
@@ -119,8 +117,7 @@ int	cd(char **av, char **envp)
 		home = get_env("HOME", envp);
 		if (!home)
 		{
-			dup2(STDOUT_FILENO, STDERR_FILENO);
-			printf("minishell: cd: HOME not set\n");
+			ft_printerror("minishell: cd: HOME not set\n");
 			return (1);
 		}
 		return (set_directory(home, 1, envp));
