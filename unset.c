@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:41:24 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 18:27:31 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:41:40 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	unset(char **arg, char ***envp)
 			if (*envp[i2])
 				*envp = remove_env(i2, *envp);
 		}
-		if (!check_export_name(arg))
+		if (!check_export_name(arg[i]))
 		{
 			ft_printerror("minishell: unset `");
 			ft_printerror(arg[i]);
