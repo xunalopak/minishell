@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:58 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 02:18:04 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 03:07:30 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <errno.h>
+
+//exit
+void		ft_exit(void);
 
 //is_a_builtin
 int			is_a_builtin(char **av);
