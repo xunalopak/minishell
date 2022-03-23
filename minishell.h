@@ -6,7 +6,7 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:45:58 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 15:25:32 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 15:42:27 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ int			ft_strlen(char *s);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_strchr_i( char *s, int c);
 int			ft_strstartwith(char *s1, char *s2);
-int			ft_strequ(char  *s1, char  *s2);
-int			ft_strncmp( char *s1,  char *s2, size_t n);
-char		*ft_strdup( char *s);
-char		*ft_strchr( char *s, int c);
-char		*ft_strjoin(char  *s1, char  *s2);
+int			ft_strequ(char *s1, char *s2);
+int			ft_strncmp(char *s1, char *s2, size_t n);
+char		*ft_strdup(char *s);
+char		*ft_strchr(char *s, int c);
+char		*ft_strjoin(char *s1, char *s2);
 char		**ft_extend_matrix(char **in, char *newstr);
-char		*ft_substr(char  *s, unsigned int start, size_t len);
+char		*ft_substr(char *s, unsigned int start, size_t len);
 ssize_t		ft_istrchr(char *str, char c);
 void		ft_free_matrix(char ***m);
 void		ft_free_array(char **array);

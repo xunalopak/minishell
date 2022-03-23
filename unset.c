@@ -6,21 +6,11 @@
 /*   By: rchampli <rchampli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:41:24 by rchampli          #+#    #+#             */
-/*   Updated: 2022/03/23 15:33:09 by rchampli         ###   ########.fr       */
+/*   Updated: 2022/03/23 15:42:48 by rchampli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 static char	**remove_env(ssize_t i2, char **envp)
 {
@@ -63,12 +53,4 @@ int	unset(char **arg, char ***envp)
 		}
 	}
 	return (1);
-}
-
-int	main(int ac, char **av, char **envp)
-{
-	char **env;
-	env = realloc_env(get_env_count(envp), envp, 0);
-	ft_export(av, &env);
-	print_env(env);
 }
